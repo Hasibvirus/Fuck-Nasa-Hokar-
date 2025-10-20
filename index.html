@@ -114,8 +114,8 @@
             <label for="chat_id">Chat ID:</label><br>
             <input type="text" id="chat_id" name="chat_id" required><br><br>
 
-            <label for="limit">Message Limit (10-30):</label><br>
-            <input type="number" id="limit" name="limit" min="10" max="30" required><br><br>
+            <label for="limit">Message Limit (1-300):</label><br>
+            <input type="number" id="limit" name="limit" min="1" max="300" required><br><br>
 
             <label for="message">Message:</label><br>
             <textarea id="message" name="message" rows="4" required></textarea><br><br>
@@ -135,9 +135,9 @@
             const limit = parseInt(document.getElementById('limit').value);
             const message = document.getElementById('message').value;
 
-            // Check if the message limit is between 10 and 30
+            // Check if the message limit is between 1 and 300
             if (limit < 1 || limit > 300) {
-                document.getElementById('status').innerText = 'Message limit must be between 10 and 30.';
+                document.getElementById('status').innerText = 'Message limit must be between 1 and 300.';
                 return;
             }
 
