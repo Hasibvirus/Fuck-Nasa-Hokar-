@@ -2,24 +2,68 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Telegram Bot Message Sender</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Message Sender</title>
 </head>
 <body>
     <h2>Send Message via Telegram Bot</h2>
-    <form action="send.php" method="POST">
+    <form id="telegramForm">
         <label for="bot_token">Bot Token:</label><br>
-        <input type="text" name="bot_token" id="bot_token" required><br><br>
+        <input type="text" id="bot_token" name="bot_token" required><br><br>
 
         <label for="chat_id">Chat ID:</label><br>
-        <input type="text" name="chat_id" id="chat_id" required><br><br>
+        <input type="text" id="chat_id" name="chat_id" required><br><br>
 
         <label for="limit">Message Limit (10-30):</label><br>
-        <input type="number" name="limit" id="limit" min="10" max="30" required><br><br>
+        <input type="number" id="limit" name="limit" min="10" max="30" required><br><br>
 
         <label for="message">Message:</label><br>
-        <textarea name="message" id="message" rows="4" required></textarea><br><br>
+        <textarea id="message" name="message" rows="4" required></textarea><br><br>
 
-        <input type="submit" value="Send Message">
+        <button type="submit">Send Message</button>
     </form>
+
+    <p id="status"></p>
+
+    <script>
+        document.getElementById('telegramForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const botToken = document.getElementById('bot_token').value;
+            const chatId = document.getElementById('chat_id').value;
+            const limit = parseInt(document.getElementById('limit').value);
+            const message = document.getElementById('message').value;
+
+            // Check if the message limit is between 10 and 30
+            if (limit < 10 || limit > 30) {
+                document.getElementById('status').innerText = 'Message limit must be between 10 and 30.';
+                return;
+            }
+
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+            // Loop to send the message the specified number of times
+            for (let i = 0; i < limit; i++) {
+                fetch(url, {
+                    method: 'POST',
+                    body: new URLSearchParams({
+                        'chat_id': chatId,
+                        'text': message
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok) {
+                        document.getElementById('status').innerText = 'Message sent successfully!';
+                    } else {
+                        document.getElementById('status').innerText = 'Error: ' + data.description;
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('status').innerText = 'Error sending message.';
+                });
+            }
+        });
+    </script>
 </body>
 </html>
