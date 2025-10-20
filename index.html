@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Telegram Bot Message Sender</title>
+</head>
+<body>
+    <h2>Send Message via Telegram Bot</h2>
+    <form action="send.php" method="POST">
+        <label for="bot_token">Bot Token:</label><br>
+        <input type="text" name="bot_token" id="bot_token" required><br><br>
+
+        <label for="chat_id">Chat ID:</label><br>
+        <input type="text" name="chat_id" id="chat_id" required><br><br>
+
+        <label for="limit">Message Limit (10-30):</label><br>
+        <input type="number" name="limit" id="limit" min="10" max="30" required><br><br>
+
+        <label for="message">Message:</label><br>
+        <textarea name="message" id="message" rows="4" required></textarea><br><br>
+
+        <input type="submit" value="Send Message">
+    </form>
+</body>
+</html>
