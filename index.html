@@ -4,26 +4,127 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Telegram Message Sender</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f06, #4a90e2);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+
+        /* Form Styling */
+        form {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        label {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            display: block;
+            text-align: left;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        input[type="number"] {
+            max-width: 100px;
+        }
+
+        textarea {
+            height: 150px;
+            resize: none;
+        }
+
+        /* Button Styles */
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 32px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Status Message Styling */
+        #status {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            form {
+                padding: 20px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h2>Send Message via Telegram Bot</h2>
-    <form id="telegramForm">
-        <label for="bot_token">Bot Token:</label><br>
-        <input type="text" id="bot_token" name="bot_token" required><br><br>
+    <div>
+        <h2>Send Message via Telegram Bot</h2>
+        <form id="telegramForm">
+            <label for="bot_token">Bot Token:</label><br>
+            <input type="text" id="bot_token" name="bot_token" required><br><br>
 
-        <label for="chat_id">Chat ID:</label><br>
-        <input type="text" id="chat_id" name="chat_id" required><br><br>
+            <label for="chat_id">Chat ID:</label><br>
+            <input type="text" id="chat_id" name="chat_id" required><br><br>
 
-        <label for="limit">Message Limit (10-30):</label><br>
-        <input type="number" id="limit" name="limit" min="10" max="30" required><br><br>
+            <label for="limit">Message Limit (10-30):</label><br>
+            <input type="number" id="limit" name="limit" min="10" max="30" required><br><br>
 
-        <label for="message">Message:</label><br>
-        <textarea id="message" name="message" rows="4" required></textarea><br><br>
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="message" rows="4" required></textarea><br><br>
 
-        <button type="submit">Send Message</button>
-    </form>
+            <button type="submit">Send Message</button>
+        </form>
 
-    <p id="status"></p>
+        <p id="status"></p>
+    </div>
 
     <script>
         document.getElementById('telegramForm').addEventListener('submit', function(event) {
